@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #f29849;
+  --color-primary-dark: #e28634;
+  --color-secondary: #1d2f40;
+  --color-secondary-dark: #23384d;
+  --color-neutral-text: #444444;
+  --color-neutral-details: #e7e7e7;
+  --color-neutral-white: #ffffff;
+
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.2;
+  --text-body-lg: 1.25rem;
+  --text-body-lg--line-height: 1.2;
+  --text-heading-xs: 1.5625rem;
+  --text-heading-xs--line-height: 1.25;
+  --text-heading-xxl: 4.75rem;
+  --text-heading-xxl--line-height: 1.25;
+
+  --shadow-elevation-2: 0 0 20px rgb(132 132 132 / 0.2);
 }
 
+/* `inline` so utilities reference the next/font variables directly: they are
+   set on <html> in the app but on a wrapper element in Storybook. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-exo2), var(--font-inter), sans-serif;
+  --font-icon: var(--font-material-icons);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-neutral-white);
+  color: var(--color-neutral-text);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
