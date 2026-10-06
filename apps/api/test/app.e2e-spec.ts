@@ -24,6 +24,30 @@ describe('GraphQL (e2e)', () => {
       .expect(({ body }) => expect(body.data.hello).toBe('Hermex API'));
   });
 
+  it('categories query', () => {
+    return request(app.getHttpServer())
+      .post('/graphql')
+      .send({ query: '{ categories { id name } }' })
+      .expect(200)
+      .expect(({ body }) => {
+        const names = body.data.categories.map(
+          (category: { name: string }) => category.name,
+        );
+        expect(names).toEqual(
+          expect.arrayContaining([
+            'Hatch',
+            'Sedan',
+            'SUV',
+            'Minivan',
+            'Picape',
+          ]),
+        );
+        expect(body.data.categories.every((c: { id: string }) => c.id)).toBe(
+          true,
+        );
+      });
+  });
+
   afterEach(async () => {
     await app.close();
   });

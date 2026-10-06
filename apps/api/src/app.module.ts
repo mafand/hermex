@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { HealthResolver } from './health/health.resolver.js';
 import { PrismaModule } from './prisma/prisma.module.js';
+import { CategoriesModule } from './categories/categories.module.js';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module.js';
       sortSchema: true,
     }),
     PrismaModule,
+    CategoriesModule,
   ],
   providers: [HealthResolver],
 })
