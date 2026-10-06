@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { HealthResolver } from './health/health.resolver.js';
 import { PrismaModule } from './prisma/prisma.module.js';
 import { CategoriesModule } from './categories/categories.module.js';
+import { LocationsModule } from './locations/locations.module.js';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CategoriesModule } from './categories/categories.module.js';
     }),
     PrismaModule,
     CategoriesModule,
+    LocationsModule,
   ],
   providers: [HealthResolver],
 })

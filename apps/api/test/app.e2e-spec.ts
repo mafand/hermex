@@ -48,6 +48,25 @@ describe('GraphQL (e2e)', () => {
       });
   });
 
+  it('locations query', () => {
+    return request(app.getHttpServer())
+      .post('/graphql')
+      .send({ query: '{ locations { id name address city state } }' })
+      .expect(200)
+      .expect(({ body }) => {
+        const locations: { id: string; name: string; city: string }[] =
+          body.data.locations;
+        const names = locations.map((location) => location.name);
+
+        expect(locations.length).toBeGreaterThanOrEqual(3);
+        expect(
+          new Set(locations.map((l) => l.city)).size,
+        ).toBeGreaterThanOrEqual(3);
+        expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
+        expect(locations.every((l) => l.id)).toBe(true);
+      });
+  });
+
   afterEach(async () => {
     await app.close();
   });
